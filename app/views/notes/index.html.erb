@@ -1,0 +1,10 @@
+<%= form_with url: '#', html: {id: 'new-note'} do |f| %>
+  <%= f.label :note %>
+  <%= f.text_field :body, id: 'note-body' %>
+  <%= f.submit %>
+<% end %>
+<hr/>
+
+<div id="notes">
+  <%= render @notes %>
+</div>

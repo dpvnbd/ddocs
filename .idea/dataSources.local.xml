@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="dataSourceStorageLocal">
+    <data-source name="Rails ddocs: test" uuid="629aca08-c8b2-4168-8a92-43ed974992b3">
+      <database-info product="" version="" jdbc-version="" driver-name="" driver-version="" family="POSTGRES" exact-version="0.0" />
+      <first-sync>true</first-sync>
+      <user-name>username</user-name>
+    </data-source>
+    <data-source name="Rails ddocs: development" uuid="37455bed-63db-4e66-b59f-44f2d5b523a2">
+      <database-info product="PostgreSQL" version="10.5 (Ubuntu 10.5-0ubuntu0.18.04)" jdbc-version="4.2" driver-name="PostgreSQL JDBC Driver" driver-version="42.2.2" family="POSTGRES" exact-version="10.5">
+        <identifier-quote-string>&quot;</identifier-quote-string>
+      </database-info>
+      <case-sensitivity plain-identifiers="lower" quoted-identifiers="exact" />
+      <user-name>username</user-name>
+      <introspection-schemas>ddocs_development:public</introspection-schemas>
+    </data-source>
+    <data-source name="Rails ddocs: production" uuid="7394ee47-d2ab-400c-b4bc-d4de02103714">
+      <database-info product="" version="" jdbc-version="" driver-name="" driver-version="" family="POSTGRES" exact-version="0.0" />
+      <first-sync>true</first-sync>
+      <user-name>ddocs</user-name>
+    </data-source>
+  </component>
+</project>

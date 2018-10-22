@@ -1,3 +1,6 @@
 Rails.application.routes.draw do
-  # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
+  devise_for :users
+  mount ActionCable.server => '/cable'
+  root to: 'notes#index'
+  get 'notes', to: 'notes#index'
 end
