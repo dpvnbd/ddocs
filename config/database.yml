@@ -81,7 +81,4 @@ test:
 #     url: <%= ENV['DATABASE_URL'] %>
 #
 production:
-  <<: *default
-  database: ddocs_production
-  username: ddocs
-  password: <%= ENV['DDOCS_DATABASE_PASSWORD'] %>
+  url: <%= ENV['DATABASE_URL'] %>
