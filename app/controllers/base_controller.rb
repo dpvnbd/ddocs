@@ -1,3 +1,5 @@
 class BaseController < ApplicationController
-  acts_as_token_authentication_handler_for User
+  include DeviseTokenAuth::Concerns::SetUserByToken
+
+  before_action :authenticate_user!
 end
