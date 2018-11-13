@@ -23,7 +23,7 @@ describe "Authentication" do
 
   describe "#create" do
     context "when correct params" do
-      let(:params) { { email: "aa@aa.aa", password: "123456", password_confirmation: "123456" } }
+      let(:params) { { name: "Test Test", email: "aa@aa.aa", password: "123456", password_confirmation: "123456" } }
 
       before do
         post "/auth", params: params
@@ -51,6 +51,30 @@ describe "Authentication" do
 
       it "responds with ok on sign out" do
         expect(response).to have_http_status(:ok)
+      end
+    end
+  end
+
+  describe "#update" do
+    subject(:user) { create :user }
+
+    context "when updating name and image" do
+      sign_in :user
+
+      let(:name) { "Test Name" }
+      let(:image) { "base64string" }
+
+      before do
+        put "/auth", params: { name: name, image: image }
+        user.reload
+      end
+
+      it "updates user name" do
+        expect(user.name).to eq(name)
+      end
+
+      it "updates user image" do
+        expect(user.image).to eq(image)
       end
     end
   end

@@ -39,6 +39,7 @@ group :development, :test do
   gem 'rails-controller-testing'
   gem 'capybara'
   gem 'selenium-webdriver', '~> 3.14', '>= 3.14.1'
+  gem 'dotenv-rails', '2.5.0'
 end
 
 group :development do
