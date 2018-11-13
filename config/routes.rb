@@ -3,5 +3,6 @@ Rails.application.routes.draw do
   
   mount ActionCable.server => '/cable'
   root to: 'notes#index'
-  get 'notes', to: 'notes#index'
+
+  resources :notes
 end
