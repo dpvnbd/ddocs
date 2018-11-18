@@ -21,7 +21,7 @@ module Requests
       end
 
       def response_data
-        JSON.parse(response.body)["data"]
+        JSON.parse(response.body)
       end
 
       private
