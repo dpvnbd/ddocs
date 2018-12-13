@@ -21,7 +21,7 @@ describe "Notes" do
     end
 
     it "responds with record's attributes" do
-      expect(response_note).to include(note.slice(:id, :body, :user_id))
+      expect(response_note).to sinclude(note.slice(:id, :body, :user_id))
     end
 
     it "responds with record's created_at time" do
@@ -73,6 +73,81 @@ describe "Notes" do
 
       it "doesn't send notification to creator" do
         expect($redis).not_to have_received(:publish).with(user.tokens.keys.first, anything)
+      end
+    end
+  end
+
+  describe "#update" do
+    subject(:user) { create :user }
+    sign_in(:user)
+
+    before do
+      put "/notes/#{note.id}", params: { note: {body: "update"} }
+    end
+
+    describe "authorization" do
+      context "when updating own note" do
+        subject(:note) { create :note, user: user }
+
+        it "responds with success" do
+          expect(response).to have_http_status(:success)
+        end
+      end
+
+      context "when updating note of other user" do
+        let(:other_user){ create :user }
+
+        subject(:note){ create :note, user: other_user }
+
+        it "responds with not found" do
+          expect(response).to have_http_status(:not_found)
+        end
+      end
+    end
+
+    describe "update attributes" do
+      subject(:note) { create :note, user: user }
+
+      it "updates note body" do
+        expect(note.reload).to have_attributes(body: "update")
+      end
+    end
+  end
+
+  describe "#destroy" do
+    subject(:user) { create :user }
+    sign_in(:user)
+
+    before do
+      delete "/notes/#{note.id}"
+    end
+
+    describe "authorization" do
+      context "when destroying own note" do
+        subject(:note) { create :note, user: user }
+
+        it "responds with success" do
+          expect(response).to have_http_status(:success)
+        end
+      end
+
+      context "when destroying note of other user" do
+        let(:other_user){ create :user }
+
+        subject(:note){ create :note, user: other_user }
+
+        it "responds with not found" do
+          expect(response).to have_http_status(:not_found)
+        end
+      end
+    end
+
+    describe "deleting record" do
+      subject(:note) { create :note, user: user }
+
+      it "deletes record from database" do
+        note_record = Note.find_by(id: note.id)
+        expect(note_record).to be_blank
       end
     end
   end
