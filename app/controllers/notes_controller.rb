@@ -9,8 +9,9 @@ class NotesController < BaseController
   end
 
   def create
+    @note = current_user.notes.create!(create_params);
     NotificationBroadcaster.new($redis, render_to_string(formats: "json"), current_user).call
-    render :show, status: :created
+    render :create, status: :created
   end
 
   def update
